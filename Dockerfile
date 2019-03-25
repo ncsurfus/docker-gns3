@@ -8,6 +8,9 @@ RUN apt-get update && \
     chmod +x gns3-remote-install.sh && \
     ./gns3-remote-install.sh --with-iou --with-i386-repository || true
 
+RUN curl -L https://github.com/ncsurfus/goioulic/releases/download/v0.1.0/linux_amd64_goioulic > /tmp/goioulic && \
+    chmod +x /tmp/goioulic
+
 COPY start.sh /tmp/start.sh
 ENTRYPOINT /tmp/start.sh
 

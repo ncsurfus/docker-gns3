@@ -1,4 +1,5 @@
 #! /bin/bash
+/tmp/goioulic
 echo Starting
 dockerd &
 (( timeout = 60 + SECONDS ))
