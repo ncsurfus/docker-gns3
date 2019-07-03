@@ -11,4 +11,4 @@ do
     fi
     sleep 1
 done
-gns3server
+exec gns3server
