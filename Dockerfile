@@ -1,16 +1,29 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && \
-    apt-get install -y curl iputils-ping openssh-client iproute2 language-pack-en lsb-release gnupg && \
-    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
-    cd /tmp && \
-    curl https://raw.githubusercontent.com/GNS3/gns3-server/master/scripts/remote-install.sh > gns3-remote-install.sh && \
-    chmod +x gns3-remote-install.sh && \
-    ./gns3-remote-install.sh --with-iou --with-i386-repository || true
+# Install Dependencies, GNS3 Server, GNS3 IOU
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get install -y software-properties-common wget docker.io --no-install-recommends \
+    && add-apt-repository ppa:gns3/ppa -y \
+    && apt-get install -y 'gns3-server=2.1.21~*' gns3-iou dynamips iouyap --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN curl -L https://github.com/ncsurfus/goioulic/releases/download/v0.1.0/linux_amd64_goioulic > /tmp/goioulic && \
-    chmod +x /tmp/goioulic
+# Add IOU License
+WORKDIR /
+RUN wget https://github.com/ncsurfus/goioulic/releases/download/v0.1.0/linux_amd64_goioulic
+RUN chmod +x linux_amd64_goioulic
+RUN echo "127.0.0.254 xml.cisco.com" >> /etc/hosts
 
-COPY start.sh /tmp/start.sh
-ENTRYPOINT /tmp/start.sh
+# Add Config / Start scripts
+ADD ./start.sh /start.sh
+ADD ./config.ini /config.ini
+RUN chmod +x /start.sh
 
+# Create Data Directory
+WORKDIR /data
+VOLUME ["/data"]
+
+ENTRYPOINT [ "/start.sh" ]

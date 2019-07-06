@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     network_mode: "host"
     volumes:
-      - gns3Docker:/var/lib/docker
-      - /persist/gns3/root/:/root/
+      - /persist/data/:/data/
 volumes:
   gns3Docker:
