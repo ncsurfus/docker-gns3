@@ -8,7 +8,7 @@ RUN dpkg --add-architecture i386 \
     && apt-get update \
     && apt-get install -y software-properties-common wget docker.io --no-install-recommends \
     && add-apt-repository ppa:gns3/ppa -y \
-    && apt-get install -y 'gns3-server=2.1.21~*' gns3-iou dynamips iouyap --no-install-recommends \
+    && apt-get install -y 'gns3-server=2.2.3~*' gns3-iou dynamips iouyap --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Add IOU License
