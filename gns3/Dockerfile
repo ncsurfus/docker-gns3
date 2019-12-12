@@ -27,7 +27,7 @@ VOLUME ["/data"]
 # Add Config / Entrypoint / Docker scripts
 ADD ./entrypoint.sh /entrypoint.sh
 ADD ./docker.sh /docker.sh
-ADD ./config.ini /data/config.ini
+ADD ./config.ini /config.ini
 RUN chmod +x /entrypoint.sh && chmod +x /docker.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
