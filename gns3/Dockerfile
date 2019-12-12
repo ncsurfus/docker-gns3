@@ -20,15 +20,14 @@ RUN wget https://github.com/ncsurfus/goioulic/releases/download/v0.1.0/linux_amd
  && chmod +x linux_amd64_goioulic \
  && echo "127.0.0.254 xml.cisco.com" >> /etc/hosts
 
-# Add Config / Entrypoint / Docker scripts
-ADD ./entrypoint.sh /entrypoint.sh
-ADD ./docker.sh /docker.sh
-ADD ./config.ini /config.ini
-RUN chmod +x /entrypoint.sh && chmod +x /docker.sh
-RUN echo '{}' > /gns3_controller.conf
-
 # Create Data Directory
 WORKDIR /data
 VOLUME ["/data"]
+
+# Add Config / Entrypoint / Docker scripts
+ADD ./entrypoint.sh /entrypoint.sh
+ADD ./docker.sh /docker.sh
+ADD ./config.ini /data/config.ini
+RUN chmod +x /entrypoint.sh && chmod +x /docker.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
