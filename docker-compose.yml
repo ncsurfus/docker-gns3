@@ -11,7 +11,6 @@ services:
         ipv4_address: 172.28.1.1
     volumes:
       - /mnt/disks/data/:/data/
-      - /mnt/disks/
   vpn:
     image: ncsurfus/gns3:2.2.3.3
     privileged: true
