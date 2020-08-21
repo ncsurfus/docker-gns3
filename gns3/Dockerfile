@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV GNS3_VERSION 2.2.8
+ENV GNS3_VERSION 2.2.12
 WORKDIR /
 
 # Install Dependencies, GNS3 Server, GNS3 IOU
