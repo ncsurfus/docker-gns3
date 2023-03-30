@@ -8,7 +8,7 @@ jobs:
     - uses: actions/checkout@master
       
     - name: Publish to Latest Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.9
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: ncsurfus/gns3
         username: ${{ secrets.DOCKER_USERNAME }}
@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@master
       
     - name: Publish to Latest Registry
-      uses: elgohr/Publish-Docker-Github-Action@2.9
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: ncsurfus/gns3-vpn
         username: ${{ secrets.DOCKER_USERNAME }}
